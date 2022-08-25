@@ -5,7 +5,7 @@ export default (rootReducer, initialState) =>{
     return {
         dispatch(action){
             state = rootReducer(state, action);
-            subscribers.forEach(()=>{sub => sub()})
+            subscribers.forEach(sub => sub())
         },
         subscribe(callback){
             subscribers.push(callback)
