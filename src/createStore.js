@@ -1,13 +1,17 @@
-export default () =>{
+export default (rootReducer, initialState) =>{
+    let state=rootReducer(initialState, {type:"__INIT__"});
+    const subscribers = [];
+
     return {
-        dispatch(){
-
+        dispatch(action){
+            state = rootReducer(state, action);
+            subscribers.forEach(()=>{sub => sub()})
         },
-        subscride(){
-
+        subscribe(callback){
+            subscribers.push(callback)
         },
         getState(){
-            
+            return state;
         }
     };
 }
